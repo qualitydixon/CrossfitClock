@@ -1,0 +1,33 @@
+{
+  "name": "react-kickstart",
+  "version": "1.0.0",
+  "description": "react, react-router, webpack, babel. All wired up and ready to go.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "prod": "webpack -p"
+  },
+  "keywords": [
+    "react",
+    "react-router"
+  ],
+  "author": "Mike Dixon <qualitydixon@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.9.1",
+    "babel-core": "^6.7.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.6.5",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.10.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
