@@ -1,0 +1,123 @@
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,700);
+
+@background: #43587F;
+@textColor: #D3E2FF;
+@alertRed: #D32F2F;
+@bigFont: 10vw;
+
+@keyframes alertColor {
+    from {color: @textColor;}
+    to {color: @alertRed;}
+}
+
+@keyframes alertFontSize {
+    from {font-size: @bigFont;}
+    to {font-size: @bigFont + 1;}  
+}
+body {
+  font-family: arimo;
+  background-color: @background;
+  color: @textColor;
+}
+
+.menu {
+  background: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+.menu-select {
+  border-bottom-style: solid;
+}
+
+.timer, .tabata, .emom {
+  text-align: center;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.timer {
+  border-right-style: solid;
+}
+
+.emom {
+  border-left-style: solid;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+}
+
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controlsContainer {
+  display: flex;
+}
+
+.elapsed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tattler {
+  font-size: @bigFont;
+  width: 100%;
+  height: 30vh;
+  text-align: center;
+  
+}
+
+.alertAnimation {
+  animation-name: alertColor, alertFontSize;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.timerControls {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  align-self: flex-start;
+  justify-content: flex-end;
+}
+
+.controls {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.rounds {
+  margin-left: 5vw;
+}
+
+.currentlySelected {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.reset, .play, .up, #minus, #plus {
+  background: transparent;
+  font-size: 22px;
+  margin: 5px;
+  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+}
+
+.up:hover, #plus:hover, #minus:hover, .play:hover, .reset:hover {
+  color: @textColor;
+}

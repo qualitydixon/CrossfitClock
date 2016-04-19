@@ -16,6 +16,8 @@
   "dependencies": {
     "axios": "^0.9.1",
     "babel-core": "^6.7.2",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0"
