@@ -14,17 +14,29 @@
     from {font-size: @bigFont;}
     to {font-size: @bigFont + 1;}  
 }
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+}
+
 body {
   font-family: arimo;
   background-color: @background;
   color: @textColor;
+  animation: fadeIn;
+  animation-duration: 1.5s;
 }
 
 .menu {
+  .flexCenter;
   background: none;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   height: 50px;
   font-size: 28px;
   font-weight: bold;
@@ -51,14 +63,12 @@ body {
 }
 
 .select {
-  display: flex;
-  align-items: center;
+  .flexCenter;
 }
 
 .selectContainer {
-  display: flex;
+  .flexCenter;
   flex-direction: column;
-  align-items: center;
 }
 
 .controlsContainer {
@@ -66,9 +76,8 @@ body {
 }
 
 .elapsed {
-  display: flex;
+  .flexCenter;
   flex-direction: column;
-  align-items: center;
 }
 
 .tattler {
@@ -76,6 +85,7 @@ body {
   width: 100%;
   height: 30vh;
   text-align: center;
+  margin-bottom: 50px;
   
 }
 
@@ -87,17 +97,15 @@ body {
 }
 
 .timerControls {
-  display: flex;
+  .flexCenter;
   flex-grow: 1;
-  align-items: center;
   align-self: flex-start;
   justify-content: flex-end;
 }
 
 .controls {
-  display: flex;
+  .flexCenter;
   width: 100%;
-  align-items: center;
   font-size: 22px;
   font-weight: bold;
 }
