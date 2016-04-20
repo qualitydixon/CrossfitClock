@@ -1,9 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Arimo:400,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 @background: #FFFFFF;
 @textColor: #35004F;
 @alertRed: #BE0031;
 @bigFont: 15vh;
+@fontFamily: Montserrat;
 
 @keyframes alertColor {
     from {color: @textColor;}
@@ -12,7 +14,7 @@
 
 @keyframes alertFontSize {
     from {font-size: @bigFont;}
-    to {font-size: @bigFont + 5;}  
+    to {font-size: @bigFont + 3;}  
 }
 
 @keyframes fadeIn {
@@ -26,7 +28,7 @@
 }
 
 body {
-  font-family: arimo;
+  font-family: @fontFamily;
   background-color: @background;
   color: @textColor;
   animation: fadeIn;
@@ -66,6 +68,11 @@ body {
   .flexCenter;
 }
 
+.main {
+  .flexCenter;
+  flex-direction: column;
+}
+
 .selectContainer {
   .flexCenter;
   flex-direction: column;
@@ -81,15 +88,14 @@ body {
 }
 
 .tattler {
+  .flexCenter;
+  
   font-size: @bigFont;
+  font-weight: bold;
   width: 100%;
   height: 30vh;
-  .flexCenter;
   justify-content: center;
   margin-bottom: 5vh;
-  border: 1px solid @textColor;
-  border-radius: 5px;
-  border-style: dotted;
   
 }
 
@@ -102,38 +108,21 @@ body {
 
 .timerControls {
   .flexCenter;
-  flex-grow: 1;
-  align-self: flex-start;
-  justify-content: flex-end;
+  align-self: center;
 }
 
 .controls {
   .flexCenter;
-  width: 100%;
-  font-size: 22px;
+  justify-content: space-between;
+  width: 40vw;
+  font-size: 30px;
   font-weight: bold;
-}
-
-.rounds {
-  margin-left: 5vw;
 }
 
 .currentlySelected {
   font-size: 50px;
   font-weight: bold;
   margin: 0px 10px 0px 10px;
-}
-
-.git {
-  color: #F4F4F4;
-  font-size: 28px;
-  margin: 10px 5px 10px 10px;
-}
-
-.twitter {
-  color: #F4F4F4;
-  font-size: 28px;
-  margin: 10px 10px 10px 5px;
 }
 
 .reset, .play, .up, #minus, #plus {

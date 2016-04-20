@@ -6,8 +6,6 @@ var MainContainer = React.createClass({
         return (
         	<div>
 	            {this.props.children}
-                <a target="_blank" href="https://github.com/qualitydixon"><i className="fa fa-github icon git"></i></a>
-                <a target="_blank" href="https://twitter.com/dixonbydesign"><i className="fa fa-twitter icon git"></i></a>
             </div>
         )
     }

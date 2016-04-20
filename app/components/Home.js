@@ -43,14 +43,14 @@ var SelectFrame = (props) => {
 var RoundsElapsed = (props) => {
   return (
     <div className="elapsed">
-      <div>Rounds Completed</div> 
+      <div>Completed</div> 
       <div className="currentlySelected">{props.roundsElapsed}</div>
     </div>)
 }
 
 var TabataControls = (props) => {
   return (
-    <div>
+    <div style={{marginRight: 20 + 'px'}}>
       <SelectFrame 
         shift={props.shift} 
         currentValue={props.tabataWork}
@@ -69,7 +69,7 @@ var TabataControls = (props) => {
 
 var Rounds = (props) => {
   return (
-    <div className="rounds">
+    <div>
       <SelectFrame 
         shift={props.shift} 
         currentValue={props.rounds} 
@@ -94,7 +94,7 @@ var Home = (props) => {
   // Add animation class when timer is at 5 seconds or less
   var tattlerClass = "tattler " + ((props.seconds <= 5 && props.playing) ? "alertAnimation" : "");
   return (
-    <div className="container">
+    <div>
         <Menu switchMode={props.switchMode} mode={props.mode} />
         <div className="main">
           <div className={tattlerClass}>{props.timeString(props.seconds)}</div>

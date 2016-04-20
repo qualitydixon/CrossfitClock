@@ -1,5 +1,8 @@
 var React = require('react');
 var Home = require('../components/Home');
+var alert = require("file!../res/alert_beep.mp3");
+var a = new Audio(alert);
+
 
 var HomeContainer = React.createClass({
   getInitialState: function() {
@@ -40,6 +43,9 @@ var HomeContainer = React.createClass({
     };
 
     if(this.state.playing) {
+      if(this.state.seconds <= 6 && this.state.seconds > 0) {
+        this.playSound();
+      }
       ticks[this.state.mode]();
     }
   },
@@ -83,8 +89,12 @@ var HomeContainer = React.createClass({
       this.finished();
     }
   },
+  playSound: function () {
+    a.play();
+  },
   finished: function() {
     console.log("***Finished***");
+    this.playSound();
     if(this.state.playing){this.togglePlay()};
   },
   shift: function(x, rounds, tab) {
