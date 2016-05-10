@@ -1,11 +1,11 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var hashHistory = ReactRouter.hashHistory;
-var IndexRoute = ReactRouter.IndexRoute;
-var MainContainer = require('../containers/MainContainer');
-var HomeContainer = require("../containers/HomeContainer");
+var React = require('react')
+var ReactRouter = require('react-router')
+var Router = ReactRouter.Router
+var Route = ReactRouter.Route
+var hashHistory = ReactRouter.hashHistory
+var IndexRoute = ReactRouter.IndexRoute
+var MainContainer = require('../containers/MainContainer')
+var HomeContainer = require('../containers/HomeContainer')
 
 var routes = (
   <Router history={hashHistory}>
@@ -13,6 +13,6 @@ var routes = (
       <IndexRoute component={HomeContainer} />
     </Route>
   </Router>
-);
+)
 
-module.exports = routes;
+module.exports = routes

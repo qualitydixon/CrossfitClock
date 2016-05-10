@@ -1,202 +1,201 @@
-var React = require('react');
-var Home = require('../components/Home');
-var alert = require("file!../res/alert_beep.mp3");
-var a = new Audio(alert);
+var React = require('react')
+var Home = require('../components/Home')
+var alert = require('file!../res/alert_beep.mp3')
+var a = new Audio(alert)
 
 
 var HomeContainer = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       seconds: 600,
       playing: false,
       countDirection: false, // false is count down and true is count up
       selectedTime: 600,
       rounds: 10,
-      mode: "Timer",
+      mode: 'Timer',
       roundsElapsed: 0,
       tabataWork: 20,
       tabataRest: 10,
-      tabataMode: true // true for 'work' and false for 'rest'
-    };
-  },
-  togglePlay: function() {
-    this.setState({
-      playing: !this.state.playing
-    });
-  },
-  toggleDirection: function() {
-    this.setState(
-      {
-        countDirection: !this.state.countDirection
-      });
-    if(!this.state.countDirection) {
-      this.setState({seconds: 0});
-    } else {
-      this.setState({seconds: this.state.selectedTime});
+      tabataMode: true, // true for 'work' and false for 'rest'
     }
   },
-  tick: function() {
+  togglePlay: function () {
+    this.setState({
+      playing: !this.state.playing,
+    })
+  },
+  toggleDirection: function () {
+    this.setState(
+      {
+        countDirection: !this.state.countDirection,
+      })
+    if (!this.state.countDirection) {
+      this.setState({seconds: 0})
+    } else {
+      this.setState({seconds: this.state.selectedTime})
+    }
+  },
+  tick: function () {
     var ticks = {
       Timer: this.tickTimer,
       EMOM: this.tickEMOM,
-      Tabata: this.tickTabata
-    };
+      Tabata: this.tickTabata,
+    }
 
-    if(this.state.playing) {
-      if(this.state.seconds <= 6 && this.state.seconds > 0) {
-        this.playSound();
+    if (this.state.playing) {
+      if (this.state.seconds <= 6 && this.state.seconds > 0) {
+        this.playSound()
       }
-      ticks[this.state.mode]();
+      ticks[this.state.mode]()
     }
   },
   // The following three tick functions establish the logic for rounds, end conditions, etc.
-  tickTimer: function() {
-      if(this.state.seconds > 0 && !this.state.countDirection) {
-        this.setState({seconds: this.state.seconds - 1});
-      } else if(this.state.seconds < this.state.selectedTime && this.state.countDirection) {
-        this.setState({seconds: this.state.seconds + 1});
-      } else {
-        this.finished();
-      }
-  },
-  tickTabata: function() {
-    if(this.state.seconds > 0) {
-      this.setState({seconds: this.state.seconds - 1});
-    } else if (this.state.rounds === this.state.roundsElapsed) {
-      this.finished();
+  tickTimer: function () {
+    if (this.state.seconds > 0 && !this.state.countDirection) {
+      this.setState({seconds: this.state.seconds - 1})
+    } else if (this.state.seconds < this.state.selectedTime && this.state.countDirection) {
+      this.setState({seconds: this.state.seconds + 1})
     } else {
-      this.setState({tabataMode: !this.state.tabataMode});
-      if(this.state.tabataMode) {
+      this.finished()
+    }
+  },
+  tickTabata: function () {
+    if (this.state.seconds > 0) {
+      this.setState({seconds: this.state.seconds - 1})
+    } else if (this.state.rounds === this.state.roundsElapsed) {
+      this.finished()
+    } else {
+      this.setState({tabataMode: !this.state.tabataMode})
+      if (this.state.tabataMode) {
         this.setState({
           seconds: this.state.tabataWork,
-          roundsElapsed: this.state.roundsElapsed + 1});
+          roundsElapsed: this.state.roundsElapsed + 1})
       } else {
         this.setState({
-          seconds: this.state.tabataRest
-        });
-      
+          seconds: this.state.tabataRest,
+        })
+
       }
     }
   },
-  tickEMOM: function() {
-    if(this.state.seconds > 0) {
-      this.setState({seconds: this.state.seconds - 1});
-    } else if(this.state.roundsElapsed <= this.state.rounds) {
+  tickEMOM: function () {
+    if (this.state.seconds > 0) {
+      this.setState({seconds: this.state.seconds - 1})
+    } else if (this.state.roundsElapsed <= this.state.rounds) {
       this.setState({
         seconds: 60,
-        roundsElapsed: this.state.roundsElapsed + 1});
+        roundsElapsed: this.state.roundsElapsed + 1})
     } else {
-      this.finished();
+      this.finished()
     }
   },
   playSound: function () {
-    a.play();
+    a.play()
   },
-  finished: function() {
-    console.log("***Finished***");
-    this.playSound();
-    if(this.state.playing){this.togglePlay()};
+  finished: function () {
+    console.log('***Finished***')
+    this.playSound()
+    if (this.state.playing) { this.togglePlay() }
   },
-  shift: function(x, rounds, tab) {
-    if (tab === "Rest" && this.state.tabataRest < 60) {
-      this.setState({ tabataRest: this.state.tabataRest + x });
-    } else if (tab === "Work" && this.state.tabataWork < 60) {
-      this.setState({ tabataWork: this.state.tabataWork + x });
+  shift: function (x, rounds, tab) {
+    if (tab === 'Rest' && this.state.tabataRest < 60) {
+      this.setState({ tabataRest: this.state.tabataRest + x })
+    } else if (tab === 'Work' && this.state.tabataWork < 60) {
+      this.setState({ tabataWork: this.state.tabataWork + x })
     } else if (rounds) {
-        this.setState({
-          rounds: this.state.rounds + (x)
-        });
+      this.setState({
+        rounds: this.state.rounds + (x),
+      })
     } else {
-        this.setState({
-          selectedTime: this.state.selectedTime + (x)
-        });      
+      this.setState({
+        selectedTime: this.state.selectedTime + (x),
+      })
     }
   },
-  timeString: function(time) {
-    var minutes = Math.floor(time / 60);
-    var seconds = time % 60;
-    var timeString = ('0' + minutes).slice(-2) + " : " + ('0' + seconds).slice(-2);
-    return timeString;
+  timeString: function (time) {
+    var minutes = Math.floor(time / 60)
+    var seconds = time % 60
+    var timeString = ('0' + minutes).slice(-2) + ' : ' + ('0' + seconds).slice(-2)
+    return timeString
   },
-  reset: function() {
-    if (this.state.playing){this.togglePlay()};
+  reset: function () {
+    if (this.state.playing) { this.togglePlay() }
     if (this.state.countDirection) {
-      this.setState({seconds: 0});
-    } else if (this.state.mode === "Tabata") {
-      this.setState({seconds: this.state.tabataWork});
+      this.setState({seconds: 0})
+    } else if (this.state.mode === 'Tabata') {
+      this.setState({seconds: this.state.tabataWork})
     } else {
       this.setState({
         seconds: this.state.selectedTime,
-        roundsElapsed: 0
-      });
+        roundsElapsed: 0,
+      })
     }
   },
-  componentDidMount: function() {
-      this.interval = setInterval(this.tick, 1000);
+  componentDidMount: function () {
+    this.interval = setInterval(this.tick, 1000)
   },
-  componentWillUnmount: function() {
-    clearInterval(this.interval);
+  componentWillUnmount: function () {
+    clearInterval(this.interval)
   },
-  switchMode: function(newMode) {
-    if(this.state.playing){this.togglePlay()};
+  switchMode: function (newMode) {
+    if (this.state.playing) { this.togglePlay() }
     var modeFunctions = {
       Timer: this.setTimer,
       EMOM: this.setEMOM,
-      Tabata: this.setTabata
-    };
-    modeFunctions[newMode]();
+      Tabata: this.setTabata,
+    }
+    modeFunctions[newMode]()
     this.setState({
-      mode: newMode
-    });    
+      mode: newMode,
+    })
   },
   /*
      The following three set functions set the initial conditions for each mode.
   */
-  setTimer: function() {
+  setTimer: function () {
     this.setState({
       selectedTime: 600,
-      seconds: 600
+      seconds: 600,
     })
   },
-  setEMOM: function() {
+  setEMOM: function () {
     this.setState({
       selectedTime: 60,
       seconds: 60,
-      countDirection: false
+      countDirection: false,
     })
   },
-  setTabata: function() {
+  setTabata: function () {
     this.setState({
       selectedTime: this.state.tabataWork,
       seconds: 20,
-      countDirection: false
+      countDirection: false,
     })
   },
-  render: function() {
+  render: function () {
     return (
-      <div className="container">
+      <div className='container'>
         <Home
           timeString={this.timeString}
           seconds={this.state.seconds}
-          shift={this.shift} 
-          togglePlay={this.togglePlay} 
-          playing={this.state.playing} 
+          shift={this.shift}
+          togglePlay={this.togglePlay}
+          playing={this.state.playing}
           reset={this.reset}
-          selection={this.state.countDirection} 
+          selection={this.state.countDirection}
           toggleDirection={this.toggleDirection}
-          countDirection={this.state.countDirection} 
+          countDirection={this.state.countDirection}
           selectedTime={this.state.selectedTime}
           switchMode={this.switchMode}
-          mode={this.state.mode} 
-          rounds={this.state.rounds} 
-          roundsElapsed={this.state.roundsElapsed} 
-          tabataWork={this.state.tabataWork} 
-          tabataRest={this.state.tabataRest} 
-          tabataMode={this.state.tabataMode}
-          />
+          mode={this.state.mode}
+          rounds={this.state.rounds}
+          roundsElapsed={this.state.roundsElapsed}
+          tabataWork={this.state.tabataWork}
+          tabataRest={this.state.tabataRest}
+          tabataMode={this.state.tabataMode}/>
       </div>
-    );
-  }
-});
+    )
+  },
+})
 
-module.exports = HomeContainer;
+module.exports = HomeContainer
