@@ -4,10 +4,10 @@ require('../stylesheets/main.less')
 var MainContainer = React.createClass({
   render: function () {
     return (
-        	<div>
-	            {this.props.children}
-            </div>
-        )
+      <div>
+        {this.props.children}
+      </div>
+    )
   },
 })
 

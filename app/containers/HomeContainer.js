@@ -1,4 +1,4 @@
-var React = require('react')
+import React, { PropTypes } from 'react'
 var Home = require('../components/Home')
 var alert = require('file!../res/alert_beep.mp3')
 var a = new Audio(alert)

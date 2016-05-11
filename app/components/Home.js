@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import SelectFrame from './SelectFrame'
+import TabataControls from './TabataControls'
 import Menu from './Menu'
 
 const Play = (props) => {
@@ -9,7 +10,16 @@ const Play = (props) => {
   )
 }
 
-const Refresh = (props) => <button id='reset' className='btn reset glyphicon glyphicon-refresh' onClick={props.reset}></button>
+Play.propTypes = {
+  playing: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
+}
+
+const Refresh = ({ reset }) => <button id='reset' className='btn reset glyphicon glyphicon-refresh' onClick={reset}></button>
+
+Refresh.propTypes = {
+  reset: PropTypes.func.isRequired,
+}
 
 const ToggleCount = (props) => {
   const className = 'btn up glyphicon glyphicon-chevron-' + (props.countDirection ? 'up' : 'down')
@@ -18,31 +28,17 @@ const ToggleCount = (props) => {
   )
 }
 
+ToggleCount.propTypes = {
+  countDirection: PropTypes.bool.isRequired,
+  toggleDirection: PropTypes.func.isRequired,
+}
+
 const RoundsElapsed = (props) => {
   return (
     <div className='elapsed'>
       <div>{'Completed'}</div>
       <div className='currentlySelected'>{props.roundsElapsed}</div>
     </div>)
-}
-
-const TabataControls = (props) => {
-  return (
-    <div style={{marginRight: 20 + 'px'}}>
-      <SelectFrame
-        shift={props.shift}
-        currentValue={props.tabataWork}
-        tabata={true}
-        delta={10}
-        title='Work' />
-      <SelectFrame
-        shift={props.shift}
-        tabata={true}
-        currentValue={props.tabataRest}
-        delta={10}
-        title='Rest' />
-    </div>
-  )
 }
 
 const Rounds = (props) => {
@@ -59,13 +55,13 @@ const Rounds = (props) => {
   )
 }
 
-const Home = (props) => {
+function Home (props) {
   // Add animation class when timer is at 5 seconds or less
   const tattlerClass = 'tattler ' + ((props.seconds <= 5 && props.playing) ? 'alertAnimation' : '')
   return (
     <div>
-        <Menu switchMode={props.switchMode} mode={props.mode} />
-        <div className='main'>
+      <Menu switchMode={props.switchMode} mode={props.mode} />
+      <div className='main'>
           <div className={tattlerClass}>{props.timeString(props.seconds)}</div>
           <div className='controls'>
             <div className='controlsContainer'>
@@ -94,6 +90,13 @@ const Home = (props) => {
         </div>
       </div>
   )
+}
+
+Home.propTypes = {
+  mode: PropTypes.string.isRequired,
+  playing: PropTypes.bool.isRequired,
+  roundsElapsed: PropTypes.number.isRequired,
+  reset: PropTypes.func.isRequired,
 }
 
 module.exports = Home
