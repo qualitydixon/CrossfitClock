@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react'
 import SelectFrame from './SelectFrame'
 import TabataControls from './TabataControls'
 import Menu from './Menu'
+import { formatTime } from '../helpers/utils'
+
+const { func, bool, string, number } = PropTypes
 
 const Play = (props) => {
   const className = 'btn play glyphicon glyphicon-' + (props.playing ? 'pause' : 'play')
@@ -11,14 +14,14 @@ const Play = (props) => {
 }
 
 Play.propTypes = {
-  playing: PropTypes.bool.isRequired,
-  togglePlay: PropTypes.func.isRequired,
+  playing: bool.isRequired,
+  togglePlay: func.isRequired,
 }
 
 const Refresh = ({ reset }) => <button id='reset' className='btn reset glyphicon glyphicon-refresh' onClick={reset}></button>
 
 Refresh.propTypes = {
-  reset: PropTypes.func.isRequired,
+  reset: func.isRequired,
 }
 
 const ToggleCount = (props) => {
@@ -29,8 +32,8 @@ const ToggleCount = (props) => {
 }
 
 ToggleCount.propTypes = {
-  countDirection: PropTypes.bool.isRequired,
-  toggleDirection: PropTypes.func.isRequired,
+  countDirection: bool.isRequired,
+  toggleDirection: func.isRequired,
 }
 
 const RoundsElapsed = (props) => {
@@ -47,7 +50,7 @@ const Rounds = (props) => {
       <SelectFrame
         shift={props.shift}
         currentValue={props.rounds}
-        roundMode={true}
+        isRounds={true}
         delta={1}
         title='Rounds' />
       <RoundsElapsed roundsElapsed={props.roundsElapsed}/>
@@ -62,7 +65,7 @@ function Home (props) {
     <div>
       <Menu switchMode={props.switchMode} mode={props.mode} />
       <div className='main'>
-          <div className={tattlerClass}>{props.timeString(props.seconds)}</div>
+          <div className={tattlerClass}>{formatTime(props.seconds)}</div>
           <div className='controls'>
             <div className='controlsContainer'>
               {props.mode === 'Tabata' && <TabataControls
@@ -93,10 +96,20 @@ function Home (props) {
 }
 
 Home.propTypes = {
-  mode: PropTypes.string.isRequired,
-  playing: PropTypes.bool.isRequired,
-  roundsElapsed: PropTypes.number.isRequired,
-  reset: PropTypes.func.isRequired,
+  shift: func.isRequired,
+  switchMode: func.isRequired,
+  togglePlay: func.isRequired,
+  toggleDirection: func.isRequired,
+  reset: func.isRequired,
+  mode: string.isRequired,
+  playing: bool.isRequired,
+  countDirection: bool.isRequired,
+  roundsElapsed: number.isRequired,
+  tabataRest: number.isRequired,
+  tabataWork: number.isRequired,
+  rounds: number.isRequired,
+  seconds: number.isRequired,
+  selectedTime: number.isRequired,
 }
 
 module.exports = Home

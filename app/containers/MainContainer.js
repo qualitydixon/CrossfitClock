@@ -1,14 +1,17 @@
-var React = require('react')
+import React, { PropTypes } from 'react'
 require('../stylesheets/main.less')
 
-var MainContainer = React.createClass({
-  render: function () {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    )
-  },
-})
+function MainContainer (props) {
+  return (
+    <div>
+      {props.children}
+    </div>
+  )
+}
+
+MainContainer.propTypes = {
+  children: PropTypes.any.isRequired,
+}
+
 
 module.exports = MainContainer

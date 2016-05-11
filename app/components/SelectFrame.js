@@ -1,19 +1,21 @@
 import React, { PropTypes } from 'react'
 
+const { func, bool, number, string } = PropTypes
+
 SelectFrame.propTypes = {
-  shift: PropTypes.func.isRequired,
-  roundMode: PropTypes.bool.isRequired,
-  currentValue: PropTypes.number.isRequired,
-  tabata: PropTypes.bool.isRequired,
-  title: PropTypes.string,
-  delta: PropTypes.number.isRequired,
+  shift: func.isRequired,
+  isRounds: bool,
+  isTabata: bool,
+  title: string,
+  delta: number.isRequired,
+  currentValue: number.isRequired,
 }
 
 export default function SelectFrame (props) {
   let display = 0
-  if (props.roundMode) {
+  if (props.isRounds) {
     display = props.currentValue
-  } else if (props.tabata) {
+  } else if (props.isTabata) {
     display = ':' + props.currentValue
   } else {
     display = Math.floor(props.currentValue / 60)

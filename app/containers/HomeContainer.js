@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react'
-var Home = require('../components/Home')
-var alert = require('file!../res/alert_beep.mp3')
-var a = new Audio(alert)
+import React from 'react'
+const Home = require('../components/Home')
+const alert = require('file!../res/alert_beep.mp3')
+const a = new Audio(alert)
 
 
-var HomeContainer = React.createClass({
+const HomeContainer = React.createClass({
   getInitialState: function () {
     return {
       seconds: 600,
@@ -36,7 +36,7 @@ var HomeContainer = React.createClass({
     }
   },
   tick: function () {
-    var ticks = {
+    const ticks = {
       Timer: this.tickTimer,
       EMOM: this.tickEMOM,
       Tabata: this.tickTabata,
@@ -74,7 +74,6 @@ var HomeContainer = React.createClass({
         this.setState({
           seconds: this.state.tabataRest,
         })
-
       }
     }
   },
@@ -112,12 +111,6 @@ var HomeContainer = React.createClass({
       })
     }
   },
-  timeString: function (time) {
-    var minutes = Math.floor(time / 60)
-    var seconds = time % 60
-    var timeString = ('0' + minutes).slice(-2) + ' : ' + ('0' + seconds).slice(-2)
-    return timeString
-  },
   reset: function () {
     if (this.state.playing) { this.togglePlay() }
     if (this.state.countDirection) {
@@ -139,7 +132,7 @@ var HomeContainer = React.createClass({
   },
   switchMode: function (newMode) {
     if (this.state.playing) { this.togglePlay() }
-    var modeFunctions = {
+    const modeFunctions = {
       Timer: this.setTimer,
       EMOM: this.setEMOM,
       Tabata: this.setTabata,
@@ -176,7 +169,6 @@ var HomeContainer = React.createClass({
     return (
       <div className='container'>
         <Home
-          timeString={this.timeString}
           seconds={this.state.seconds}
           shift={this.shift}
           togglePlay={this.togglePlay}

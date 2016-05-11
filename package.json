@@ -1,5 +1,5 @@
 {
-  "name": "crossfit clock",
+  "name": "crossfit-clock",
   "version": "1.0.0",
   "description": "A timer app to facilitate crossfit workouts.",
   "main": "index.js",

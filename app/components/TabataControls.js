@@ -13,12 +13,12 @@ export default function TabataControls (props) {
       <SelectFrame
         shift={props.shift}
         currentValue={props.tabataWork}
-        tabata={true}
+        isTabata={true}
         delta={10}
         title='Work' />
       <SelectFrame
         shift={props.shift}
-        tabata={true}
+        isTabata={true}
         currentValue={props.tabataRest}
         delta={10}
         title='Rest' />
