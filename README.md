@@ -1,10 +1,12 @@
 # Crossfit Clock
 
-![alt text](https://raw.githubusercontent.com/qualitydixon/CrossfitClock/master/app/screenshots/screen1.png "Tabata")
-
 ![alt text](http://g.recordit.co/orOBcsCLYW.gif "Tabata")
 
-LIVE DEMO
+LIVE DEMO (coming soon)
+
+## Built with...
+
+Built with React, React-Router, Webpack, Less, and eslint (standardJS).
 
 ## Installation
 
@@ -20,4 +22,4 @@ Just fork and clone this repo, run `npm install`, then `npm run start`. You will
 
 ## Codepen
 
-This project started as a codepen and was moved to codepen when it became unwieldy to have all the code in one file. It is functional, though no longer maintained. See it [here](http://codepen.io/qualitydixon/pen/wMNqXq)
+This project started as a codepen and was moved to github when it became unwieldy to have all the code in one file. The codepen version is functional, though no longer maintained. See it [here](http://codepen.io/qualitydixon/pen/wMNqXq)
