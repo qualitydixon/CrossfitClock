@@ -3,7 +3,6 @@ const Home = require('../components/Home')
 const alert = require('file!../res/alert_beep.mp3')
 const a = new Audio(alert)
 
-
 const HomeContainer = React.createClass({
   getInitialState: function () {
     return {
@@ -92,7 +91,6 @@ const HomeContainer = React.createClass({
     a.play()
   },
   finished: function () {
-    console.log('***Finished***')
     this.playSound()
     if (this.state.playing) { this.togglePlay() }
   },
@@ -140,6 +138,7 @@ const HomeContainer = React.createClass({
     modeFunctions[newMode]()
     this.setState({
       mode: newMode,
+      roundsElapsed: 0,
     })
   },
   /*

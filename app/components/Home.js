@@ -36,14 +36,6 @@ ToggleCount.propTypes = {
   toggleDirection: func.isRequired,
 }
 
-const RoundsElapsed = (props) => {
-  return (
-    <div className='elapsed'>
-      <div>{'Completed'}</div>
-      <div className='currentlySelected'>{props.roundsElapsed}</div>
-    </div>)
-}
-
 const Rounds = (props) => {
   return (
     <div>
@@ -53,9 +45,18 @@ const Rounds = (props) => {
         isRounds={true}
         delta={1}
         title='Rounds' />
-      <RoundsElapsed roundsElapsed={props.roundsElapsed}/>
+        <div className='elapsed'>
+          <div>{'Completed'}</div>
+          <div className='currentlySelected'>{props.roundsElapsed}</div>
+        </div>
     </div>
   )
+}
+
+Rounds.propTypes = {
+  rounds: number.isRequired,
+  shift: func.isRequired,
+  roundsElapsed: number.isRequired,
 }
 
 function Home (props) {

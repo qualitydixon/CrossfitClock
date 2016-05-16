@@ -14,7 +14,7 @@ Clone this repo, run `npm install`, then `npm run start`. You will see the proje
 
 ## Todo
 
-- Update timer when user changes session length. Currently need to hit reset button to change time.
+- Update timer when user changes session length. Currently need to hit reset button to change set time.
 - UI does not work well on thin screens.
 - Highlight which mode is selected in menu.
 - Update screenshots.
