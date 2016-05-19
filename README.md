@@ -19,6 +19,7 @@ Clone this repo, run `npm install`, then `npm run start`. You will see the proje
 - Highlight which mode is selected in menu.
 - Update screenshots.
 - Add live demo.
+- Maybe get rid or React Router.
 
 ## Codepen
 
