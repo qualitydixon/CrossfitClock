@@ -6,7 +6,11 @@ LIVE DEMO (coming soon)
 
 ## Built with...
 
-Built with React, React-Router, Webpack, Less, and eslint (standardJS).
+- React
+- React-Router
+- Webpack
+- Less
+- ESLint (standardJS).
 
 ## Installation
 
