@@ -107,6 +107,11 @@ const HomeContainer = React.createClass({
       this.setState({
         selectedTime: this.state.selectedTime + (x),
       })
+      if(!this.state.playing) {
+          this.setState({
+              seconds: this.state.seconds + (x),
+          })
+      }
     }
   },
   reset: function () {
