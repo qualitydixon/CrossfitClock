@@ -4,7 +4,7 @@ import TabataControls from './TabataControls'
 import Menu from './Menu'
 import { formatTime } from '../helpers/utils'
 
-const { func, bool, string, number } = PropTypes
+const { func, bool, string, number, object } = PropTypes
 
 const Play = (props) => {
   const className = 'btn play glyphicon glyphicon-' + (props.playing ? 'pause' : 'play')
@@ -38,7 +38,7 @@ ToggleCount.propTypes = {
 
 const Rounds = (props) => {
   return (
-    <div>
+    <div style={props.style}>
       <SelectFrame
         shift={props.shift}
         currentValue={props.rounds}
@@ -57,6 +57,7 @@ Rounds.propTypes = {
   rounds: number.isRequired,
   shift: func.isRequired,
   roundsElapsed: number.isRequired,
+  style: object,
 }
 
 function Home (props) {
@@ -67,8 +68,8 @@ function Home (props) {
       <Menu switchMode={props.switchMode} mode={props.mode} />
       <div className='main'>
           <div className={tattlerClass}>{formatTime(props.seconds)}</div>
-          <div className='controls'>
-            <div className='controlsContainer'>
+          <div className='controlsContainer'>
+            <div className='controls'>
               {props.mode === 'Tabata' && <TabataControls
                                           tabataWork={props.tabataWork}
                                           tabataRest={props.tabataRest}
@@ -81,7 +82,8 @@ function Home (props) {
               {props.mode !== 'Timer' && <Rounds
                                          shift={props.shift}
                                          rounds={props.rounds}
-                                         roundsElapsed={props.roundsElapsed} />}
+                                         roundsElapsed={props.roundsElapsed}
+                                         style={{marginLeft: '40px'}} />}
             </div>
             <div className='timerControls'>
               <Play togglePlay={props.togglePlay} playing={props.playing} />

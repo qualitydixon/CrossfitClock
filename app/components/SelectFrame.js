@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const { func, bool, number, string } = PropTypes
+const { func, bool, number, string, object } = PropTypes
 
 SelectFrame.propTypes = {
   shift: func.isRequired,
