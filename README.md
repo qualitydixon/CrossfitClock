@@ -10,7 +10,7 @@ LIVE DEMO (coming soon)
 - React-Router
 - Webpack
 - Less
-- ESLint (standardJS).
+- ESLint (StandardJS).
 
 ## Installation
 
@@ -20,10 +20,10 @@ Clone this repo, run `npm install`, then `npm run start`. You will see the proje
 
 - ~~Update timer when user changes session length. Currently need to hit reset button to change set time.~~
 - UI does not work well on thin screens.
-- Highlight which mode is selected in menu.
-- Update screenshots.
+- ~~Highlight which mode is selected in menu.~~
+- ~~Update screenshots.~~
 - Add live demo.
-- Maybe get rid or React Router.
+- Maybe get rid or React Router. Doesn't help but might not hurt anything either.
 
 ## Codepen
 

@@ -25,14 +25,14 @@ Refresh.propTypes = {
 }
 
 const ToggleCount = (props) => {
-  const className = 'btn up glyphicon glyphicon-chevron-' + (props.countDirection ? 'up' : 'down')
+  const className = 'btn up glyphicon glyphicon-chevron-' + (props.isCountingUp ? 'up' : 'down')
   return (
     <button className={className} onClick={props.toggleDirection}></button>
   )
 }
 
 ToggleCount.propTypes = {
-  countDirection: bool.isRequired,
+  isCountingUp: bool.isRequired,
   toggleDirection: func.isRequired,
 }
 
@@ -87,7 +87,7 @@ function Home (props) {
               <Play togglePlay={props.togglePlay} playing={props.playing} />
               <Refresh reset={props.reset}/>
               {props.mode === 'Timer' && <ToggleCount
-                                         countDirection={props.countDirection}
+                                         isCountingUp={props.isCountingUp}
                                          toggleDirection={props.toggleDirection}/>}
             </div>
           </div>
@@ -104,7 +104,7 @@ Home.propTypes = {
   reset: func.isRequired,
   mode: string.isRequired,
   playing: bool.isRequired,
-  countDirection: bool.isRequired,
+  isCountingUp: bool.isRequired,
   roundsElapsed: number.isRequired,
   tabataRest: number.isRequired,
   tabataWork: number.isRequired,
