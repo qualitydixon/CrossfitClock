@@ -13,10 +13,8 @@ SelectFrame.propTypes = {
 
 export default function SelectFrame (props) {
   let display = 0
-  if (props.isRounds) {
+  if (props.isRounds || props.isTabata) {
     display = props.currentValue
-  } else if (props.isTabata) {
-    display = ':' + props.currentValue
   } else {
     display = Math.floor(props.currentValue / 60)
   }

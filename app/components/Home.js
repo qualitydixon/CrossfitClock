@@ -6,10 +6,10 @@ import { formatTime } from '../helpers/utils'
 
 const { func, bool, string, number, object } = PropTypes
 
-const Play = (props) => {
-  const className = 'btn play glyphicon glyphicon-' + (props.playing ? 'pause' : 'play')
+const Play = ({ playing, togglePlay }) => {
+  const className = 'btn play glyphicon glyphicon-' + (playing ? 'pause' : 'play')
   return (
-    <button id='play' className={className} onClick={props.togglePlay}></button>
+    <button id='play' className={className} onClick={togglePlay}></button>
   )
 }
 
@@ -24,10 +24,10 @@ Refresh.propTypes = {
   reset: func.isRequired,
 }
 
-const ToggleCount = (props) => {
-  const className = 'btn up glyphicon glyphicon-chevron-' + (props.isCountingUp ? 'up' : 'down')
+const ToggleCount = ({ isCountingUp, toggleDirection }) => {
+  const className = 'btn up glyphicon glyphicon-chevron-' + (isCountingUp ? 'up' : 'down')
   return (
-    <button className={className} onClick={props.toggleDirection}></button>
+    <button className={className} onClick={toggleDirection}></button>
   )
 }
 
@@ -36,18 +36,18 @@ ToggleCount.propTypes = {
   toggleDirection: func.isRequired,
 }
 
-const Rounds = (props) => {
+const Rounds = ({ style, shift, rounds, roundsElapsed }) => {
   return (
-    <div style={props.style}>
+    <div style={style}>
       <SelectFrame
-        shift={props.shift}
-        currentValue={props.rounds}
+        shift={shift}
+        currentValue={rounds}
         isRounds={true}
         delta={1}
         title='Rounds' />
         <div className='elapsed'>
           <div>{'Completed'}</div>
-          <div className='currentlySelected'>{props.roundsElapsed}</div>
+          <div className='currentlySelected'>{roundsElapsed}</div>
         </div>
     </div>
   )
