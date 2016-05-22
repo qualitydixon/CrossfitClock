@@ -36,11 +36,11 @@ ToggleCount.propTypes = {
   toggleDirection: func.isRequired,
 }
 
-const Rounds = ({ style, shift, rounds, roundsElapsed }) => {
+const Rounds = ({ style, shiftRounds, rounds, roundsElapsed }) => {
   return (
     <div style={style}>
       <SelectFrame
-        shift={shift}
+        shift={shiftRounds}
         currentValue={rounds}
         isRounds={true}
         delta={1}
@@ -55,7 +55,7 @@ const Rounds = ({ style, shift, rounds, roundsElapsed }) => {
 
 Rounds.propTypes = {
   rounds: number.isRequired,
-  shift: func.isRequired,
+  shiftRounds: func.isRequired,
   roundsElapsed: number.isRequired,
   style: object,
 }
@@ -80,7 +80,7 @@ function Home (props) {
                                         delta={60}
                                         title='Minutes' />}
               {props.mode !== 'Timer' && <Rounds
-                                         shift={props.shift}
+                                         shiftRounds={props.shiftRounds}
                                          rounds={props.rounds}
                                          roundsElapsed={props.roundsElapsed}
                                          style={{marginLeft: '40px'}} />}
@@ -100,6 +100,7 @@ function Home (props) {
 
 Home.propTypes = {
   shift: func.isRequired,
+  shiftRounds: func.isRequired,
   switchMode: func.isRequired,
   togglePlay: func.isRequired,
   toggleDirection: func.isRequired,

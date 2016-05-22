@@ -114,6 +114,11 @@ const HomeContainer = React.createClass({
       }
     }
   },
+  shiftRounds: function (x) {
+    this.setState({
+        rounds: this.state.rounds + (x),
+    })  
+  },
   reset: function () {
     if (this.state.playing) { this.togglePlay() }
     if (this.state.isCountingUp) {
@@ -175,6 +180,7 @@ const HomeContainer = React.createClass({
         <Home
           seconds={this.state.seconds}
           shift={this.shift}
+          shiftRounds={this.shiftRounds}
           togglePlay={this.togglePlay}
           playing={this.state.playing}
           reset={this.reset}
