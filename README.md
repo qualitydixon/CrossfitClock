@@ -2,7 +2,7 @@
 
 ![alt text](http://g.recordit.co/orOBcsCLYW.gif "Tabata")
 
-LIVE DEMO (coming soon)
+[LIVE DEMO](http://qualitydixon.github.io/CrossfitClock/)
 
 ## Built with...
 
