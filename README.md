@@ -21,7 +21,7 @@ Clone this repo, run `npm install`, then `npm run start`. You will see the proje
 - ~~Update timer when user changes session length. Currently need to hit reset button to change set time.~~
 - ~~Highlight which mode is selected in menu.~~
 - ~~Update screenshots.~~
-- Add live demo.
+- ~~Add live demo.~~
 - Maybe get rid or React Router. Doesn't help but might not hurt anything either.
 - Tabata mode shows one extra work countdown at end of session.
 
