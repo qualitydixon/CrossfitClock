@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Arimo:400,700);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-@background: #99CCFF;
+@background: #071A2B;
 @textColor: #FFFFCC;
 @alertRed: #BE0031;
 @bigFont: 15vh;
@@ -79,7 +79,17 @@ body {
 }
 
 .controlsContainer {
+  .flexCenter;
+  justify-content: space-between;
+  width: 70vw;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.controls {
   display: flex;
+  flex-grow: 1;
+  align-self: flex-start;
 }
 
 .elapsed {
@@ -108,14 +118,6 @@ body {
 .timerControls {
   .flexCenter;
   align-self: center;
-}
-
-.controls {
-  .flexCenter;
-  justify-content: space-between;
-  width: 40vw;
-  font-size: 30px;
-  font-weight: bold;
 }
 
 .currentlySelected {

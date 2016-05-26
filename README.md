@@ -6,7 +6,11 @@ LIVE DEMO (coming soon)
 
 ## Built with...
 
-Built with React, React-Router, Webpack, Less, and eslint (standardJS).
+- React
+- React-Router
+- Webpack
+- Less
+- ESLint (StandardJS).
 
 ## Installation
 
@@ -14,11 +18,12 @@ Clone this repo, run `npm install`, then `npm run start`. You will see the proje
 
 ## Todo
 
-- Update timer when user changes session length. Currently need to hit reset button to change set time.
-- UI does not work well on thin screens.
-- Highlight which mode is selected in menu.
-- Update screenshots.
+- ~~Update timer when user changes session length. Currently need to hit reset button to change set time.~~
+- ~~Highlight which mode is selected in menu.~~
+- ~~Update screenshots.~~
 - Add live demo.
+- Maybe get rid or React Router. Doesn't help but might not hurt anything either.
+- Tabata mode shows one extra work countdown at end of session.
 
 ## Codepen
 

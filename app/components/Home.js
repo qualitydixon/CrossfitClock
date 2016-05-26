@@ -4,12 +4,12 @@ import TabataControls from './TabataControls'
 import Menu from './Menu'
 import { formatTime } from '../helpers/utils'
 
-const { func, bool, string, number } = PropTypes
+const { func, bool, string, number, object } = PropTypes
 
-const Play = (props) => {
-  const className = 'btn play glyphicon glyphicon-' + (props.playing ? 'pause' : 'play')
+const Play = ({ playing, togglePlay }) => {
+  const className = 'btn play glyphicon glyphicon-' + (playing ? 'pause' : 'play')
   return (
-    <button id='play' className={className} onClick={props.togglePlay}></button>
+    <button id='play' className={className} onClick={togglePlay}></button>
   )
 }
 
@@ -24,30 +24,30 @@ Refresh.propTypes = {
   reset: func.isRequired,
 }
 
-const ToggleCount = (props) => {
-  const className = 'btn up glyphicon glyphicon-chevron-' + (props.countDirection ? 'up' : 'down')
+const ToggleCount = ({ isCountingUp, toggleDirection }) => {
+  const className = 'btn up glyphicon glyphicon-chevron-' + (isCountingUp ? 'up' : 'down')
   return (
-    <button className={className} onClick={props.toggleDirection}></button>
+    <button className={className} onClick={toggleDirection}></button>
   )
 }
 
 ToggleCount.propTypes = {
-  countDirection: bool.isRequired,
+  isCountingUp: bool.isRequired,
   toggleDirection: func.isRequired,
 }
 
-const Rounds = (props) => {
+const Rounds = ({ style, shiftRounds, rounds, roundsElapsed }) => {
   return (
-    <div>
+    <div style={style}>
       <SelectFrame
-        shift={props.shift}
-        currentValue={props.rounds}
+        shift={shiftRounds}
+        currentValue={rounds}
         isRounds={true}
         delta={1}
         title='Rounds' />
         <div className='elapsed'>
           <div>{'Completed'}</div>
-          <div className='currentlySelected'>{props.roundsElapsed}</div>
+          <div className='currentlySelected'>{roundsElapsed}</div>
         </div>
     </div>
   )
@@ -55,8 +55,9 @@ const Rounds = (props) => {
 
 Rounds.propTypes = {
   rounds: number.isRequired,
-  shift: func.isRequired,
+  shiftRounds: func.isRequired,
   roundsElapsed: number.isRequired,
+  style: object,
 }
 
 function Home (props) {
@@ -67,8 +68,8 @@ function Home (props) {
       <Menu switchMode={props.switchMode} mode={props.mode} />
       <div className='main'>
           <div className={tattlerClass}>{formatTime(props.seconds)}</div>
-          <div className='controls'>
-            <div className='controlsContainer'>
+          <div className='controlsContainer'>
+            <div className='controls'>
               {props.mode === 'Tabata' && <TabataControls
                                           tabataWork={props.tabataWork}
                                           tabataRest={props.tabataRest}
@@ -79,15 +80,16 @@ function Home (props) {
                                         delta={60}
                                         title='Minutes' />}
               {props.mode !== 'Timer' && <Rounds
-                                         shift={props.shift}
+                                         shiftRounds={props.shiftRounds}
                                          rounds={props.rounds}
-                                         roundsElapsed={props.roundsElapsed} />}
+                                         roundsElapsed={props.roundsElapsed}
+                                         style={{marginLeft: '40px'}} />}
             </div>
             <div className='timerControls'>
               <Play togglePlay={props.togglePlay} playing={props.playing} />
               <Refresh reset={props.reset}/>
               {props.mode === 'Timer' && <ToggleCount
-                                         countDirection={props.countDirection}
+                                         isCountingUp={props.isCountingUp}
                                          toggleDirection={props.toggleDirection}/>}
             </div>
           </div>
@@ -98,13 +100,14 @@ function Home (props) {
 
 Home.propTypes = {
   shift: func.isRequired,
+  shiftRounds: func.isRequired,
   switchMode: func.isRequired,
   togglePlay: func.isRequired,
   toggleDirection: func.isRequired,
   reset: func.isRequired,
   mode: string.isRequired,
   playing: bool.isRequired,
-  countDirection: bool.isRequired,
+  isCountingUp: bool.isRequired,
   roundsElapsed: number.isRequired,
   tabataRest: number.isRequired,
   tabataWork: number.isRequired,

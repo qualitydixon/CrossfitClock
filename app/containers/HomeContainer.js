@@ -8,7 +8,7 @@ const HomeContainer = React.createClass({
     return {
       seconds: 600,
       playing: false,
-      countDirection: false, // false is count down and true is count up
+      isCountingUp: false,
       selectedTime: 600,
       rounds: 10,
       mode: 'Timer',
@@ -26,9 +26,9 @@ const HomeContainer = React.createClass({
   toggleDirection: function () {
     this.setState(
       {
-        countDirection: !this.state.countDirection,
+        isCountingUp: !this.state.isCountingUp,
       })
-    if (!this.state.countDirection) {
+    if (!this.state.isCountingUp) {
       this.setState({seconds: 0})
     } else {
       this.setState({seconds: this.state.selectedTime})
@@ -50,9 +50,9 @@ const HomeContainer = React.createClass({
   },
   // The following three tick functions establish the logic for rounds, end conditions, etc.
   tickTimer: function () {
-    if (this.state.seconds > 0 && !this.state.countDirection) {
+    if (this.state.seconds > 0 && !this.state.isCountingUp) {
       this.setState({seconds: this.state.seconds - 1})
-    } else if (this.state.seconds < this.state.selectedTime && this.state.countDirection) {
+    } else if (this.state.seconds < this.state.selectedTime && this.state.isCountingUp) {
       this.setState({seconds: this.state.seconds + 1})
     } else {
       this.finished()
@@ -107,11 +107,21 @@ const HomeContainer = React.createClass({
       this.setState({
         selectedTime: this.state.selectedTime + (x),
       })
+      if(!this.state.playing) {
+          this.setState({
+              seconds: this.state.seconds + (x),
+          })
+      }
     }
+  },
+  shiftRounds: function (x) {
+    this.setState({
+        rounds: this.state.rounds + (x),
+    })  
   },
   reset: function () {
     if (this.state.playing) { this.togglePlay() }
-    if (this.state.countDirection) {
+    if (this.state.isCountingUp) {
       this.setState({seconds: 0})
     } else if (this.state.mode === 'Tabata') {
       this.setState({seconds: this.state.tabataWork})
@@ -154,14 +164,14 @@ const HomeContainer = React.createClass({
     this.setState({
       selectedTime: 60,
       seconds: 60,
-      countDirection: false,
+      isCountingUp: false,
     })
   },
   setTabata: function () {
     this.setState({
       selectedTime: this.state.tabataWork,
       seconds: 20,
-      countDirection: false,
+      isCountingUp: false,
     })
   },
   render: function () {
@@ -170,12 +180,13 @@ const HomeContainer = React.createClass({
         <Home
           seconds={this.state.seconds}
           shift={this.shift}
+          shiftRounds={this.shiftRounds}
           togglePlay={this.togglePlay}
           playing={this.state.playing}
           reset={this.reset}
-          selection={this.state.countDirection}
+          selection={this.state.isCountingUp}
           toggleDirection={this.toggleDirection}
-          countDirection={this.state.countDirection}
+          isCountingUp={this.state.isCountingUp}
           selectedTime={this.state.selectedTime}
           switchMode={this.switchMode}
           mode={this.state.mode}
