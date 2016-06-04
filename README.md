@@ -25,7 +25,8 @@ Clone this repo, run `npm install`, then `npm run start`. You will see the proje
 - Maybe get rid or React Router. Doesn't help but might not hurt anything either.
 - Tabata mode shows one extra work countdown at end of session.
 - Changing count up target is not working properly with refactored shift function.
-- Convert all instances of createClass to ES6 classes.
+- ~~Convert all instances of createClass to ES6 classes.~~
+- Fix animation on count up.
 
 ## Codepen
 

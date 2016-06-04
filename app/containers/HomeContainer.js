@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 const Home = require('../components/Home')
 const alert = require('file!../res/alert_beep.mp3')
 const a = new Audio(alert)
 
-const HomeContainer = React.createClass({
-  getInitialState: function () {
-    return {
+export default class HomeContainer extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
       seconds: 600,
       playing: false,
       isCountingUp: false,
@@ -17,13 +18,13 @@ const HomeContainer = React.createClass({
       tabataRest: 10,
       tabataMode: true, // true for 'work' and false for 'rest'
     }
-  },
-  togglePlay: function () {
+  }
+  togglePlay () {
     this.setState({
       playing: !this.state.playing,
     })
-  },
-  toggleDirection: function () {
+  }
+  toggleDirection () {
     this.setState(
       {
         isCountingUp: !this.state.isCountingUp,
@@ -33,12 +34,12 @@ const HomeContainer = React.createClass({
     } else {
       this.setState({seconds: this.state.selectedTime})
     }
-  },
-  tick: function () {
+  }
+  tick () {
     const ticks = {
-      Timer: this.tickTimer,
-      EMOM: this.tickEMOM,
-      Tabata: this.tickTabata,
+      Timer: () => this.tickTimer(),
+      EMOM: () => this.tickEMOM(),
+      Tabata: () => this.tickTabata(),
     }
 
     if (this.state.playing) {
@@ -47,9 +48,9 @@ const HomeContainer = React.createClass({
       }
       ticks[this.state.mode]()
     }
-  },
+  }
   // The following three tick functions establish the logic for rounds, end conditions, etc.
-  tickTimer: function () {
+  tickTimer () {
     if (this.state.seconds > 0 && !this.state.isCountingUp) {
       this.setState({seconds: this.state.seconds - 1})
     } else if (this.state.seconds < this.state.selectedTime && this.state.isCountingUp) {
@@ -57,8 +58,8 @@ const HomeContainer = React.createClass({
     } else {
       this.finished()
     }
-  },
-  tickTabata: function () {
+  }
+  tickTabata () {
     if (this.state.seconds > 0) {
       this.setState({seconds: this.state.seconds - 1})
     } else if (this.state.rounds === this.state.roundsElapsed) {
@@ -75,8 +76,8 @@ const HomeContainer = React.createClass({
         })
       }
     }
-  },
-  tickEMOM: function () {
+  }
+  tickEMOM () {
     if (this.state.seconds > 0) {
       this.setState({seconds: this.state.seconds - 1})
     } else if (this.state.roundsElapsed <= this.state.rounds) {
@@ -86,15 +87,15 @@ const HomeContainer = React.createClass({
     } else {
       this.finished()
     }
-  },
-  playSound: function () {
+  }
+  playSound () {
     a.play()
-  },
-  finished: function () {
+  }
+  finished () {
     this.playSound()
-    if (this.state.playing) { this.togglePlay() }
-  },
-  shift: function (x, rounds, tab) {
+    if (this.state.playing) { () => this.togglePlay() }
+  }
+  shift (x, rounds, tab) {
     if (tab === 'Rest' && this.state.tabataRest < 60) {
       this.setState({ tabataRest: this.state.tabataRest + x })
     } else if (tab === 'Work' && this.state.tabataWork < 60) {
@@ -107,20 +108,20 @@ const HomeContainer = React.createClass({
       this.setState({
         selectedTime: this.state.selectedTime + (x),
       })
-      if(!this.state.playing) {
-          this.setState({
-              seconds: this.state.seconds + (x),
-          })
+      if (!this.state.playing) {
+        this.setState({
+          seconds: this.state.seconds + (x),
+        })
       }
     }
-  },
-  shiftRounds: function (x) {
+  }
+  shiftRounds (x) {
     this.setState({
-        rounds: this.state.rounds + (x),
-    })  
-  },
-  reset: function () {
-    if (this.state.playing) { this.togglePlay() }
+      rounds: this.state.rounds + (x),
+    })
+  }
+  reset () {
+    if (this.state.playing) { () => this.togglePlay() }
     if (this.state.isCountingUp) {
       this.setState({seconds: 0})
     } else if (this.state.mode === 'Tabata') {
@@ -131,64 +132,64 @@ const HomeContainer = React.createClass({
         roundsElapsed: 0,
       })
     }
-  },
-  componentDidMount: function () {
-    this.interval = setInterval(this.tick, 1000)
-  },
-  componentWillUnmount: function () {
+  }
+  componentDidMount () {
+    this.interval = setInterval(() => this.tick(), 1000)
+  }
+  componentWillUnmount () {
     clearInterval(this.interval)
-  },
-  switchMode: function (newMode) {
-    if (this.state.playing) { this.togglePlay() }
+  }
+  switchMode (newMode) {
+    if (this.state.playing) { () => this.togglePlay() }
     const modeFunctions = {
-      Timer: this.setTimer,
-      EMOM: this.setEMOM,
-      Tabata: this.setTabata,
+      Timer: () => this.setTimer(),
+      EMOM: () => this.setEMOM(),
+      Tabata: () => this.setTabata(),
     }
     modeFunctions[newMode]()
     this.setState({
       mode: newMode,
       roundsElapsed: 0,
     })
-  },
+  }
   /*
      The following three set functions set the initial conditions for each mode.
   */
-  setTimer: function () {
+  setTimer () {
     this.setState({
       selectedTime: 600,
       seconds: 600,
     })
-  },
-  setEMOM: function () {
+  }
+  setEMOM () {
     this.setState({
       selectedTime: 60,
       seconds: 60,
       isCountingUp: false,
     })
-  },
-  setTabata: function () {
+  }
+  setTabata () {
     this.setState({
       selectedTime: this.state.tabataWork,
       seconds: 20,
       isCountingUp: false,
     })
-  },
-  render: function () {
+  }
+  render () {
     return (
       <div className='container'>
         <Home
           seconds={this.state.seconds}
-          shift={this.shift}
-          shiftRounds={this.shiftRounds}
-          togglePlay={this.togglePlay}
+          shift={(x, rounds, tab) => this.shift(x, rounds, tab)}
+          shiftRounds={(x) => this.shiftRounds(x)}
+          togglePlay={() => this.togglePlay()}
           playing={this.state.playing}
-          reset={this.reset}
+          reset={() => this.reset()}
           selection={this.state.isCountingUp}
-          toggleDirection={this.toggleDirection}
+          toggleDirection={() => this.toggleDirection()}
           isCountingUp={this.state.isCountingUp}
           selectedTime={this.state.selectedTime}
-          switchMode={this.switchMode}
+          switchMode={(newMode) => this.switchMode(newMode)}
           mode={this.state.mode}
           rounds={this.state.rounds}
           roundsElapsed={this.state.roundsElapsed}
@@ -197,7 +198,5 @@ const HomeContainer = React.createClass({
           tabataMode={this.state.tabataMode}/>
       </div>
     )
-  },
-})
-
-module.exports = HomeContainer
+  }
+}
