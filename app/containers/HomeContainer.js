@@ -16,7 +16,7 @@ export default class HomeContainer extends Component {
       roundsElapsed: 0,
       tabataWork: 20,
       tabataRest: 10,
-      tabataMode: true, // true for 'work' and false for 'rest'
+      isWork: true, // true for 'work' and false for 'rest'
     }
   }
   togglePlay () {
@@ -62,11 +62,12 @@ export default class HomeContainer extends Component {
   tickTabata () {
     if (this.state.seconds > 0) {
       this.setState({seconds: this.state.seconds - 1})
-    } else if (this.state.rounds === this.state.roundsElapsed) {
+    } else if (!this.state.isWork && this.state.rounds === (this.state.roundsElapsed + 1)) {
+      this.setState({roundsElapsed: this.state.roundsElapsed + 1})
       this.finished()
     } else {
-      this.setState({tabataMode: !this.state.tabataMode})
-      if (this.state.tabataMode) {
+      this.setState({isWork: !this.state.isWork})
+      if (this.state.isWork) {
         this.setState({
           seconds: this.state.tabataWork,
           roundsElapsed: this.state.roundsElapsed + 1})
@@ -93,7 +94,7 @@ export default class HomeContainer extends Component {
   }
   finished () {
     this.playSound()
-    if (this.state.playing) { () => this.togglePlay() }
+    if (this.state.playing) { this.togglePlay() }
   }
   shift (x, rounds, tab) {
     if (tab === 'Rest' && this.state.tabataRest < 60) {
@@ -121,7 +122,7 @@ export default class HomeContainer extends Component {
     })
   }
   reset () {
-    if (this.state.playing) { () => this.togglePlay() }
+    if (this.state.playing) { this.togglePlay }
     if (this.state.isCountingUp) {
       this.setState({seconds: 0})
     } else if (this.state.mode === 'Tabata') {
@@ -140,7 +141,7 @@ export default class HomeContainer extends Component {
     clearInterval(this.interval)
   }
   switchMode (newMode) {
-    if (this.state.playing) { () => this.togglePlay() }
+    if (this.state.playing) { this.togglePlay }
     const modeFunctions = {
       Timer: () => this.setTimer(),
       EMOM: () => this.setEMOM(),
@@ -195,7 +196,7 @@ export default class HomeContainer extends Component {
           roundsElapsed={this.state.roundsElapsed}
           tabataWork={this.state.tabataWork}
           tabataRest={this.state.tabataRest}
-          tabataMode={this.state.tabataMode}/>
+          isWork={this.state.isWork}/>
       </div>
     )
   }
