@@ -12,9 +12,9 @@ export default function Menu (props) {
         className='tabata'
         style={(props.mode === 'Tabata') ? highlight : {}}
         onClick={() => props.switchMode('Tabata')}>{'Tabata'}</div>
-      <div id='emom' 
-        style={(props.mode === 'EMOM') ? highlight : {}} 
-        className='emom' 
+      <div id='emom'
+        style={(props.mode === 'EMOM') ? highlight : {}}
+        className='emom'
         onClick={() => props.switchMode('EMOM')}>{'EMOM'}</div>
     </div>
     )

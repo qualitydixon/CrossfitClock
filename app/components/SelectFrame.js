@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
 
-const { func, bool, number, string, object } = PropTypes
+const { func, bool, number, string } = PropTypes
 
 SelectFrame.propTypes = {
   shift: func.isRequired,
+  roundMode: func.isRequired,
   isRounds: bool,
   isTabata: bool,
   title: string,
