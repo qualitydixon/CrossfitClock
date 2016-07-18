@@ -43,7 +43,7 @@ export default class HomeContainer extends Component {
     }
 
     if (this.state.playing) {
-      if (this.state.seconds <= 6 && this.state.seconds > 0) {
+      if (this.state.seconds <= 5 && this.state.seconds > 0 && !this.state.isCountingUp) {
         this.playSound()
       }
       ticks[this.state.mode]()
