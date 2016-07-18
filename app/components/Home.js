@@ -60,9 +60,9 @@ Rounds.propTypes = {
   style: object,
 }
 
-function Home (props) {
-  // Add animation class when timer is at 5 seconds or less
-  const tattlerClass = 'tattler ' + ((props.seconds <= 5 && props.playing) ? 'alertAnimation' : '')
+export default function Home (props) {
+  const shouldAnimate = (props.seconds <= 5 && props.playing && !props.isCountingUp)
+  const tattlerClass = 'tattler ' + (shouldAnimate ? 'alertAnimation' : '')
   return (
     <div>
       <Menu switchMode={props.switchMode} mode={props.mode} />
@@ -115,5 +115,3 @@ Home.propTypes = {
   seconds: number.isRequired,
   selectedTime: number.isRequired,
 }
-
-module.exports = Home

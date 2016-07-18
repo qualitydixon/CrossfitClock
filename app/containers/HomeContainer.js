@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-const Home = require('../components/Home')
+import Home from '../components/Home'
 const alert = require('file!../res/alert_beep.mp3')
 const a = new Audio(alert)
 
@@ -196,7 +196,8 @@ export default class HomeContainer extends Component {
           roundsElapsed={this.state.roundsElapsed}
           tabataWork={this.state.tabataWork}
           tabataRest={this.state.tabataRest}
-          isWork={this.state.isWork}/>
+          isWork={this.state.isWork}
+        />
       </div>
     )
   }
