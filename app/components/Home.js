@@ -25,9 +25,9 @@ Refresh.propTypes = {
 }
 
 const ToggleCount = ({ isCountingUp, toggleDirection }) => {
-  const className = 'btn up glyphicon glyphicon-chevron-' + (isCountingUp ? 'up' : 'down')
+  const className = 'glyphicon glyphicon-chevron-down' + (isCountingUp ? ' flip' : ' unflip')
   return (
-    <button className={className} onClick={toggleDirection}></button>
+    <button className='btn up' onClick={toggleDirection}><i className={className}></i></button>
   )
 }
 

@@ -137,3 +137,14 @@ body {
 .up:hover, #plus:hover, #minus:hover, .play:hover, .reset:hover {
   color: @background !important;
 }
+
+.flip {
+  transition: all 0.5s linear;
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
+
+.unflip {
+  transition: all 0.5s linear;
+}
