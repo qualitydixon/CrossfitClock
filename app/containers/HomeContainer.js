@@ -97,11 +97,14 @@ export default class HomeContainer extends Component {
     if (this.state.playing) { this.togglePlay() }
   }
   shift (x, rounds, tab) {
-    console.log(tab)
-    if (tab === 'Rest' && this.state.tabataRest < 60) {
-      this.setState({ tabataRest: this.state.tabataRest + x })
-    } else if (tab === 'Work' && this.state.tabataWork < 60) {
-      this.setState({ tabataWork: this.state.tabataWork + x })
+    if (tab === 'Rest') {
+      if (this.state.tabataRest + x <= 60 && this.state.tabataRest + x >= 10) {
+        this.setState({ tabataRest: this.state.tabataRest + x })
+      }
+    } else if (tab === 'Work') {
+      if (this.state.tabataWork + x <= 60 && this.state.tabataWork + x >= 10) {
+        this.setState({ tabataWork: this.state.tabataWork + x })
+      }
     } else if (rounds) {
       this.setState({
         rounds: this.state.rounds + (x),
@@ -118,9 +121,11 @@ export default class HomeContainer extends Component {
     }
   }
   shiftRounds (x) {
-    this.setState({
-      rounds: this.state.rounds + (x),
-    })
+    if(this.state.rounds + x >= 1 && this.state.rounds + x <= 30) {
+      this.setState({
+        rounds: this.state.rounds + (x),
+      })
+    }
   }
   reset () {
     if (this.state.playing) { this.togglePlay }
