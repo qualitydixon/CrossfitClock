@@ -97,6 +97,7 @@ export default class HomeContainer extends Component {
     if (this.state.playing) { this.togglePlay() }
   }
   shift (x, rounds, tab) {
+    console.log(tab)
     if (tab === 'Rest' && this.state.tabataRest < 60) {
       this.setState({ tabataRest: this.state.tabataRest + x })
     } else if (tab === 'Work' && this.state.tabataWork < 60) {

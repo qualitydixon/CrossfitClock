@@ -22,9 +22,9 @@ export default function SelectFrame (props) {
     <div className='selectContainer'>
       {props.title && <div>{props.title}</div>}
       <div className='select'>
-        <button id='minus' className='btn glyphicon glyphicon-minus' onClick={props.shift.bind(null, -props.delta, props.title)}></button>
+        <button id='minus' className='btn glyphicon glyphicon-minus' onClick={props.shift.bind(null, -props.delta, props.isRounds, props.title)}></button>
         <div className='currentlySelected'> {display} </div>
-        <button id='plus' className='btn glyphicon glyphicon-plus' onClick={props.shift.bind(null, props.delta, props.title)}></button>
+        <button id='plus' className='btn glyphicon glyphicon-plus' onClick={props.shift.bind(null, props.delta, props.isRounds, props.title)}></button>
       </div>
     </div>)
 }
