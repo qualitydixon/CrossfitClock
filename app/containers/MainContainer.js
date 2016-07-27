@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-require('../stylesheets/main.less')
+import '../stylesheets/main.less'
 
-function MainContainer (props) {
+export default function MainContainer (props) {
   return (
     <div>
       {props.children}
@@ -12,6 +12,3 @@ function MainContainer (props) {
 MainContainer.propTypes = {
   children: PropTypes.any.isRequired,
 }
-
-
-module.exports = MainContainer
