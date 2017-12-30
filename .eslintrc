@@ -12,17 +12,16 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "plugins": [ "react" ],
-  "extends": ["eslint:recommended", "plugin:react/recommended", "standard"],
+  "plugins": ["react"],
+  "extends": [
+    "prettier",
+    "prettier/react",
+    "prettier/standard",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "rules": {
-    "no-console": [2, {"allow": ["warn", "error"]}],
-    "comma-dangle" : [2, "always-multiline"],
-    "semi": [2, "never"],
-    "no-extra-semi": 2,
-    "jsx-quotes": [2, "prefer-single"],
-    "react/jsx-boolean-value": [2, "always"],
-    "react/jsx-curly-spacing": [2, "never", {"allowMultiline": false}],
-    "react/jsx-no-literals": 2,
-    "react/self-closing-comp": 2,
-  },
+    "no-console": [2, { "allow": ["warn", "error"] }],
+    "comma-dangle": 0
+  }
 }
