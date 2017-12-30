@@ -1,4 +1,11 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
+import cx from 'classnames'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import {
+  faPlay,
+  faPause,
+  faAngleDoubleUp,
+} from '@fortawesome/fontawesome-free-solid'
 import SelectFrame from './SelectFrame'
 import TabataControls from './TabataControls'
 import Menu from './Menu'
@@ -7,9 +14,11 @@ import { formatTime } from '../helpers/utils'
 const { func, bool, string, number, object } = PropTypes
 
 const Play = ({ playing, togglePlay }) => {
-  const className = 'btn play glyphicon glyphicon-' + (playing ? 'pause' : 'play')
+  const className = ''
   return (
-    <button id='play' className={className} onClick={togglePlay}></button>
+    <button id="play" className={className} onClick={togglePlay}>
+      <FontAwesomeIcon icon={playing ? faPause : faPlay} />
+    </button>
   )
 }
 
@@ -18,16 +27,25 @@ Play.propTypes = {
   togglePlay: func.isRequired,
 }
 
-const Refresh = ({ reset }) => <button id='reset' className='btn reset glyphicon glyphicon-refresh' onClick={reset}></button>
+const Refresh = ({ reset }) => (
+  <button
+    id="reset"
+    className="btn reset glyphicon glyphicon-refresh"
+    onClick={reset}
+  />
+)
 
 Refresh.propTypes = {
   reset: func.isRequired,
 }
 
 const ToggleCount = ({ isCountingUp, toggleDirection }) => {
-  const className = 'glyphicon glyphicon-chevron-down' + (isCountingUp ? ' flip' : ' unflip')
+  const className =
+    'glyphicon glyphicon-chevron-down' + (isCountingUp ? ' flip' : ' unflip')
   return (
-    <button className='btn up' onClick={toggleDirection}><i className={className}></i></button>
+    <button className="btn up" onClick={toggleDirection}>
+      <i className={className} />
+    </button>
   )
 }
 
@@ -44,11 +62,12 @@ const Rounds = ({ style, shiftRounds, rounds, roundsElapsed }) => {
         currentValue={rounds}
         isRounds={true}
         delta={1}
-        title='Rounds' />
-        <div className='elapsed'>
-          <div>{'Completed'}</div>
-          <div className='currentlySelected'>{roundsElapsed}</div>
-        </div>
+        title="Rounds"
+      />
+      <div className="elapsed">
+        <div>{'Completed'}</div>
+        <div className="currentlySelected">{roundsElapsed}</div>
+      </div>
     </div>
   )
 }
@@ -60,42 +79,73 @@ Rounds.propTypes = {
   style: object,
 }
 
-export default function Home (props) {
-  const shouldAnimate = (props.seconds <= 5 && props.playing && !props.isCountingUp)
-  const tattlerClass = 'tattler ' + (shouldAnimate ? 'alertAnimation' : '')
-  return (
-    <div>
-      <Menu switchMode={props.switchMode} mode={props.mode} />
-      <div className='main'>
-          <div className={tattlerClass}>{formatTime(props.seconds)}</div>
-          <div className='controlsContainer'>
-            <div className='controls'>
-              {props.mode === 'Tabata' && <TabataControls
-                                          tabataWork={props.tabataWork}
-                                          tabataRest={props.tabataRest}
-                                          shift={props.shift} />}
-              {props.mode === 'Timer' && <SelectFrame
-                                        shift={props.shift}
-                                        currentValue={props.selectedTime}
-                                        delta={60}
-                                        title='Minutes' />}
-              {props.mode !== 'Timer' && <Rounds
-                                         shiftRounds={props.shiftRounds}
-                                         rounds={props.rounds}
-                                         roundsElapsed={props.roundsElapsed}
-                                         style={{marginLeft: '40px'}} />}
+export default class Home extends Component {
+  render() {
+    const {
+      mode,
+      switchMode,
+      seconds,
+      tabataWork,
+      tabataRest,
+      shift,
+      playing,
+      isCountingUp,
+      selectedTime,
+      rounds,
+      shiftRounds,
+      roundsElapsed,
+      togglePlay,
+      toggleDirection,
+      reset,
+    } = this.props
+    const shouldAnimate = seconds <= 5 && playing && !isCountingUp
+    const tattlerClass = cx('tattler', { alertAnimation: shouldAnimate })
+    return (
+      <div>
+        <Menu switchMode={switchMode} mode={mode} />
+        <div className="main">
+          <div className={tattlerClass}>{formatTime(seconds)}</div>
+          <div className="controlsContainer">
+            <div className="controls">
+              {mode === 'Tabata' && (
+                <TabataControls
+                  tabataWork={tabataWork}
+                  tabataRest={tabataRest}
+                  shift={shift}
+                />
+              )}
+              {mode === 'Timer' && (
+                <SelectFrame
+                  shift={shift}
+                  currentValue={selectedTime}
+                  delta={60}
+                  title="Minutes"
+                />
+              )}
+              {mode !== 'Timer' && (
+                <Rounds
+                  shiftRounds={shiftRounds}
+                  rounds={rounds}
+                  roundsElapsed={roundsElapsed}
+                  style={{ marginLeft: '40px' }}
+                />
+              )}
             </div>
-            <div className='timerControls'>
-              <Play togglePlay={props.togglePlay} playing={props.playing} />
-              <Refresh reset={props.reset}/>
-              {props.mode === 'Timer' && <ToggleCount
-                                         isCountingUp={props.isCountingUp}
-                                         toggleDirection={props.toggleDirection}/>}
+            <div className="timerControls">
+              <Play togglePlay={togglePlay} playing={playing} />
+              <Refresh reset={reset} />
+              {mode === 'Timer' && (
+                <ToggleCount
+                  isCountingUp={isCountingUp}
+                  toggleDirection={toggleDirection}
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
-  )
+    )
+  }
 }
 
 Home.propTypes = {
