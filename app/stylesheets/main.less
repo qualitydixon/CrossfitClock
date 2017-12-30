@@ -1,25 +1,34 @@
-@import url(https://fonts.googleapis.com/css?family=Arimo:400,700);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-
-@background: #071A2B;
-@textColor: #FFFFCC;
-@alertRed: #BE0031;
+@background: #071a2b;
+@textColor: #ffffcc;
+@alertRed: #be0031;
 @bigFont: 15vh;
-@fontFamily: Montserrat;
+@fontFamily: Cousine;
 
 @keyframes alertColor {
-    from {color: @textColor;}
-    to {color: @alertRed;}
+  from {
+    color: @textColor;
+  }
+  to {
+    color: @alertRed;
+  }
 }
 
 @keyframes alertFontSize {
-    from {font-size: @bigFont;}
-    to {font-size: @bigFont + 3;}
+  from {
+    font-size: @bigFont;
+  }
+  to {
+    font-size: @bigFont + 3;
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0}
-  to {opacity: 1}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .flexCenter {
@@ -28,7 +37,7 @@
 }
 
 body {
-  font-family: @fontFamily;
+  font-family: Cutive Mono;
   background-color: @background;
   color: @textColor;
   animation: fadeIn;
@@ -43,25 +52,30 @@ body {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 10px;
-  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 }
 
 .menu-select {
   border-bottom-style: solid;
 }
 
-.timer, .tabata, .emom {
+.timer,
+.tabata,
+.emom {
   text-align: center;
+  transition: color 200ms ease;
   flex-grow: 1;
   cursor: pointer;
 }
 
 .timer {
   border-right-style: solid;
+  border-color: #fff;
 }
 
 .emom {
   border-left-style: solid;
+  border-color: #fff;
 }
 
 .select {
@@ -105,12 +119,12 @@ body {
   height: 30vh;
   justify-content: center;
   margin-bottom: 5vh;
-  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 }
 
 .alertAnimation {
   animation-name: alertColor, alertFontSize;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
@@ -126,15 +140,23 @@ body {
   margin: 0px 10px 0px 10px;
 }
 
-.reset, .play, .up, #minus, #plus {
+.reset,
+.play,
+.up,
+#minus,
+#plus {
   background: @textColor;
   color: @background;
   font-size: 22px;
   margin: 5px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 }
 
-.up:hover, #plus:hover, #minus:hover, .play:hover, .reset:hover {
+.up:hover,
+#plus:hover,
+#minus:hover,
+.play:hover,
+.reset:hover {
   color: @background !important;
 }
 
