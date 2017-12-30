@@ -84,7 +84,7 @@ export default class Home extends Component {
     const {
       mode,
       switchMode,
-      seconds,
+      totalSeconds,
       tabataWork,
       tabataRest,
       shift,
@@ -98,13 +98,18 @@ export default class Home extends Component {
       toggleDirection,
       reset,
     } = this.props
-    const shouldAnimate = seconds <= 5 && playing && !isCountingUp
+    const shouldAnimate = totalSeconds <= 5 && playing && !isCountingUp
     const tattlerClass = cx('tattler', { alertAnimation: shouldAnimate })
+    const { minutes, seconds } = formatTime(totalSeconds)
     return (
       <div>
         <Menu switchMode={switchMode} mode={mode} />
         <div className="main">
-          <div className={tattlerClass}>{formatTime(seconds)}</div>
+          <div className={tattlerClass}>
+            {minutes}
+            <span className="colon">:</span>
+            {seconds}
+          </div>
           <div className="controlsContainer">
             <div className="controls">
               {mode === 'Tabata' && (
