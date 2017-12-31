@@ -1,18 +1,15 @@
 {
   "name": "crossfit-clock",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A timer app to facilitate crossfit workouts.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "prod": "webpack -p",
-    "deploy": "gh-pages -d dist",
+    "dev": "webpack-dev-server",
+    "build": "webpack -p",
+    "deploy": "webpack -p && gh-pages -d dist",
     "fix": "eslint --fix app/."
   },
-  "keywords": [
-    "react",
-    "react-router"
-  ],
+  "keywords": ["react", "react-router"],
   "author": "Mike Dixon <qualitydixon@gmail.com>",
   "license": "ISC",
   "dependencies": {

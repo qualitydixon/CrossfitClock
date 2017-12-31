@@ -6,28 +6,19 @@
 
 ## Built with...
 
-- React
-- React-Router
-- Webpack
-- Less
-- ESLint (StandardJS).
+* React
+* Webpack
+* Less
 
 ## Installation
 
-Clone this repo, run `npm install`, then `npm run start`. You will see the project at `http://localhost:8080/` in your browser.
+Clone this repo, run `npm i` or `yarn`, then `npm run dev`. You will see the project at `http://localhost:8080/` in your browser.
 
 ## Todo
 
-- ~~Update timer when user changes session length. Currently need to hit reset button to change set time.~~
-- ~~Highlight which mode is selected in menu.~~
-- ~~Update screenshots.~~
-- ~~Add live demo.~~
-- Maybe get rid of React Router. Doesn't help but might not hurt anything either.
-- ~~Tabata mode shows one extra work countdown at end of session.~~
-- Changing count up target is not working properly with refactored shift function.
-- ~~Convert all instances of createClass to ES6 classes.~~
-- Fix animation on count up.
-
-## Codepen
-
-This project started as a codepen and was moved to github when it became unwieldy to have all the code in one file. The codepen version is functional, though no longer maintained. See it [here](http://codepen.io/qualitydixon/pen/wMNqXq).
+* Improve Responsiveness
+* Add service worker for offline capabilities
+* Animate time change
+* Upgrade to React 16
+* Include changelog
+* Changing count up target is not working properly with refactored shift function.
