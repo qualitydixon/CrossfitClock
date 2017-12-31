@@ -20,5 +20,6 @@ Clone this repo, run `npm i` or `yarn`, then `npm run dev`. You will see the pro
 * Add service worker for offline capabilities
 * Animate time change
 * Upgrade to React 16
-* Include changelog
+* ~~Include changelog~~
+* Update screenshots
 * Changing count up target is not working properly with refactored shift function.
