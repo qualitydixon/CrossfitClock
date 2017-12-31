@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import SelectFrame from './SelectFrame'
 
 TabataControls.propTypes = {
@@ -7,21 +8,23 @@ TabataControls.propTypes = {
   tabataRest: PropTypes.number.isRequired,
 }
 
-export default function TabataControls (props) {
+export default function TabataControls(props) {
   return (
-    <div style={{marginRight: 20 + 'px'}}>
+    <div style={{ marginRight: 20 + 'px' }}>
       <SelectFrame
         shift={props.shift}
         currentValue={props.tabataWork}
         isTabata={true}
         delta={10}
-        title='Work' />
+        title="Work"
+      />
       <SelectFrame
         shift={props.shift}
         isTabata={true}
         currentValue={props.tabataRest}
         delta={10}
-        title='Rest' />
+        title="Rest"
+      />
     </div>
   )
 }
