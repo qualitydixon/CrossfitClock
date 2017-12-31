@@ -2,7 +2,7 @@
 @textColor: #ffffcc;
 @alertRed: #be0031;
 @bigFont: 15vh;
-@fontFamily: Cousine;
+@fontFamily: PT Mono, monospace;
 
 @keyframes alertColor {
   from {
@@ -37,11 +37,22 @@
 }
 
 body {
-  font-family: Cutive Mono;
+  font-family: @fontFamily;
   background-color: @background;
   color: @textColor;
   animation: fadeIn;
   animation-duration: 1.5s;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.btn {
+  border: none;
+  cursor: pointer;
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 3px;
+  transition: all 200ms ease;
 }
 
 .menu {
@@ -50,7 +61,7 @@ body {
   justify-content: space-between;
   height: 50px;
   font-size: 28px;
-  font-weight: bold;
+  // font-weight: bold;
   margin-bottom: 10px;
   text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 }
@@ -71,6 +82,11 @@ body {
 .timer {
   border-right-style: solid;
   border-color: #fff;
+}
+.bigTimer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .emom {
@@ -119,7 +135,6 @@ body {
   height: 30vh;
   justify-content: center;
   margin-bottom: 5vh;
-  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 }
 
 .alertAnimation {
@@ -132,24 +147,18 @@ body {
 .timerControls {
   .flexCenter;
   align-self: center;
+  .btnTimer {
+    margin: 0.5em;
+    font-size: 20px;
+    width: 50px;
+    cursor: pointer;
+  }
 }
 
 .currentlySelected {
   font-size: 50px;
   font-weight: bold;
   margin: 0px 10px 0px 10px;
-}
-
-.reset,
-.play,
-.up,
-#minus,
-#plus {
-  background: @textColor;
-  color: @background;
-  font-size: 22px;
-  margin: 5px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
 }
 
 .up:hover,
@@ -169,4 +178,7 @@ body {
 
 .unflip {
   transition: all 0.5s linear;
+}
+.colon {
+  transform: translateY(-9px);
 }

@@ -1,17 +1,17 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Home from '../components/Home'
 const alert = require('file!../res/alert_beep.mp3')
 const a = new Audio(alert)
 
 export default class HomeContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       seconds: 600,
       playing: false,
       isCountingUp: false,
       selectedTime: 600,
-      rounds: 10,
+      rounds: 8,
       mode: 'Timer',
       roundsElapsed: 0,
       tabataWork: 20,
@@ -19,23 +19,22 @@ export default class HomeContainer extends Component {
       isWork: true, // true for 'work' and false for 'rest'
     }
   }
-  togglePlay () {
+  togglePlay() {
     this.setState({
       playing: !this.state.playing,
     })
   }
-  toggleDirection () {
-    this.setState(
-      {
-        isCountingUp: !this.state.isCountingUp,
-      })
+  toggleDirection() {
+    this.setState({
+      isCountingUp: !this.state.isCountingUp,
+    })
     if (!this.state.isCountingUp) {
-      this.setState({seconds: 0})
+      this.setState({ seconds: 0 })
     } else {
-      this.setState({seconds: this.state.selectedTime})
+      this.setState({ seconds: this.state.selectedTime })
     }
   }
-  tick () {
+  tick() {
     const ticks = {
       Timer: () => this.tickTimer(),
       EMOM: () => this.tickEMOM(),
@@ -43,34 +42,45 @@ export default class HomeContainer extends Component {
     }
 
     if (this.state.playing) {
-      if (this.state.seconds <= 5 && this.state.seconds > 0 && !this.state.isCountingUp) {
+      if (
+        this.state.seconds <= 5 &&
+        this.state.seconds > 0 &&
+        !this.state.isCountingUp
+      ) {
         this.playSound()
       }
       ticks[this.state.mode]()
     }
   }
   // The following three tick functions establish the logic for rounds, end conditions, etc.
-  tickTimer () {
+  tickTimer() {
     if (this.state.seconds > 0 && !this.state.isCountingUp) {
-      this.setState({seconds: this.state.seconds - 1})
-    } else if (this.state.seconds < this.state.selectedTime && this.state.isCountingUp) {
-      this.setState({seconds: this.state.seconds + 1})
+      this.setState({ seconds: this.state.seconds - 1 })
+    } else if (
+      this.state.seconds < this.state.selectedTime &&
+      this.state.isCountingUp
+    ) {
+      this.setState({ seconds: this.state.seconds + 1 })
     } else {
       this.finished()
     }
   }
-  tickTabata () {
+  tickTabata() {
     if (this.state.seconds > 0) {
-      this.setState({seconds: this.state.seconds - 1})
-    } else if (!this.state.isWork && this.state.rounds === (this.state.roundsElapsed + 1)) {
-      this.setState({roundsElapsed: this.state.roundsElapsed + 1})
+      this.setState({ seconds: this.state.seconds - 1 })
+    } else if (
+      !this.state.isWork &&
+      this.state.rounds === this.state.roundsElapsed + 1
+    ) {
+      this.setState({ roundsElapsed: this.state.roundsElapsed + 1 })
       this.finished()
     } else {
-      this.setState({isWork: !this.state.isWork})
+      this.setState({ isWork: !this.state.isWork })
       if (this.state.isWork) {
         this.setState({
           seconds: this.state.tabataWork,
-          roundsElapsed: this.state.roundsElapsed + 1})
+          roundsElapsed: this.state.roundsElapsed + 1,
+        })
       } else {
         this.setState({
           seconds: this.state.tabataRest,
@@ -78,25 +88,28 @@ export default class HomeContainer extends Component {
       }
     }
   }
-  tickEMOM () {
+  tickEMOM() {
     if (this.state.seconds > 0) {
-      this.setState({seconds: this.state.seconds - 1})
+      this.setState({ seconds: this.state.seconds - 1 })
     } else if (this.state.roundsElapsed <= this.state.rounds) {
       this.setState({
         seconds: 60,
-        roundsElapsed: this.state.roundsElapsed + 1})
+        roundsElapsed: this.state.roundsElapsed + 1,
+      })
     } else {
       this.finished()
     }
   }
-  playSound () {
+  playSound() {
     a.play()
   }
-  finished () {
+  finished() {
     this.playSound()
-    if (this.state.playing) { this.togglePlay() }
+    if (this.state.playing) {
+      this.togglePlay()
+    }
   }
-  shift (x, rounds, tab) {
+  shift(x, rounds, tab) {
     if (tab === 'Rest') {
       if (this.state.tabataRest + x <= 60 && this.state.tabataRest + x >= 10) {
         this.setState({ tabataRest: this.state.tabataRest + x })
@@ -107,32 +120,34 @@ export default class HomeContainer extends Component {
       }
     } else if (rounds) {
       this.setState({
-        rounds: this.state.rounds + (x),
+        rounds: this.state.rounds + x,
       })
     } else {
       this.setState({
-        selectedTime: this.state.selectedTime + (x),
+        selectedTime: this.state.selectedTime + x,
       })
       if (!this.state.playing) {
         this.setState({
-          seconds: this.state.seconds + (x),
+          seconds: this.state.seconds + x,
         })
       }
     }
   }
-  shiftRounds (x) {
-    if(this.state.rounds + x >= 1 && this.state.rounds + x <= 30) {
+  shiftRounds(x) {
+    if (this.state.rounds + x >= 1 && this.state.rounds + x <= 30) {
       this.setState({
-        rounds: this.state.rounds + (x),
+        rounds: this.state.rounds + x,
       })
     }
   }
-  reset () {
-    if (this.state.playing) { this.togglePlay }
+  reset() {
+    if (this.state.playing) {
+      this.togglePlay
+    }
     if (this.state.isCountingUp) {
-      this.setState({seconds: 0})
+      this.setState({ seconds: 0 })
     } else if (this.state.mode === 'Tabata') {
-      this.setState({seconds: this.state.tabataWork})
+      this.setState({ seconds: this.state.tabataWork })
     } else {
       this.setState({
         seconds: this.state.selectedTime,
@@ -140,14 +155,16 @@ export default class HomeContainer extends Component {
       })
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     this.interval = setInterval(() => this.tick(), 1000)
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.interval)
   }
-  switchMode (newMode) {
-    if (this.state.playing) { this.togglePlay }
+  switchMode(newMode) {
+    if (this.state.playing) {
+      this.togglePlay
+    }
     const modeFunctions = {
       Timer: () => this.setTimer(),
       EMOM: () => this.setEMOM(),
@@ -162,33 +179,33 @@ export default class HomeContainer extends Component {
   /*
      The following three set functions set the initial conditions for each mode.
   */
-  setTimer () {
+  setTimer() {
     this.setState({
       selectedTime: 600,
       seconds: 600,
     })
   }
-  setEMOM () {
+  setEMOM() {
     this.setState({
       selectedTime: 60,
       seconds: 60,
       isCountingUp: false,
     })
   }
-  setTabata () {
+  setTabata() {
     this.setState({
       selectedTime: this.state.tabataWork,
       seconds: 20,
       isCountingUp: false,
     })
   }
-  render () {
+  render() {
     return (
-      <div className='container'>
+      <div className="container">
         <Home
-          seconds={this.state.seconds}
+          totalSeconds={this.state.seconds}
           shift={(x, rounds, tab) => this.shift(x, rounds, tab)}
-          shiftRounds={(x) => this.shiftRounds(x)}
+          shiftRounds={x => this.shiftRounds(x)}
           togglePlay={() => this.togglePlay()}
           playing={this.state.playing}
           reset={() => this.reset()}
@@ -196,7 +213,7 @@ export default class HomeContainer extends Component {
           toggleDirection={() => this.toggleDirection()}
           isCountingUp={this.state.isCountingUp}
           selectedTime={this.state.selectedTime}
-          switchMode={(newMode) => this.switchMode(newMode)}
+          switchMode={newMode => this.switchMode(newMode)}
           mode={this.state.mode}
           rounds={this.state.rounds}
           roundsElapsed={this.state.roundsElapsed}

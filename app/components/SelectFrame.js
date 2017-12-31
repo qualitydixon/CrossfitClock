@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { faPlus, faMinus } from '@fortawesome/fontawesome-free-solid'
 
 const { func, bool, number, string } = PropTypes
 
@@ -11,7 +14,7 @@ SelectFrame.propTypes = {
   currentValue: number.isRequired,
 }
 
-export default function SelectFrame (props) {
+export default function SelectFrame(props) {
   let display = 0
   if (props.isRounds || props.isTabata) {
     display = props.currentValue
@@ -19,20 +22,35 @@ export default function SelectFrame (props) {
     display = Math.floor(props.currentValue / 60)
   }
   return (
-    <div className='selectContainer'>
+    <div className="selectContainer">
       {props.title && <div>{props.title}</div>}
-      <div className='select'>
+      <div className="select">
         <button
-          id='minus'
-          className='btn glyphicon glyphicon-minus'
-          onClick={props.shift.bind(null, -props.delta, props.isRounds, props.title)}>
+          id="minus"
+          className="btn"
+          onClick={props.shift.bind(
+            null,
+            -props.delta,
+            props.isRounds,
+            props.title,
+          )}
+        >
+          <FontAwesomeIcon icon={faMinus} />
         </button>
-        <div className='currentlySelected'> {display} </div>
+        <div className="currentlySelected"> {display} </div>
         <button
-          id='plus'
-          className='btn glyphicon glyphicon-plus'
-          onClick={props.shift.bind(null, props.delta, props.isRounds, props.title)}>
+          id="plus"
+          className="btn"
+          onClick={props.shift.bind(
+            null,
+            props.delta,
+            props.isRounds,
+            props.title,
+          )}
+        >
+          <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
-    </div>)
+    </div>
+  )
 }

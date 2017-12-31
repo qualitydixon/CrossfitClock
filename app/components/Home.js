@@ -1,10 +1,12 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import {
   faPlay,
   faPause,
   faAngleDoubleUp,
+  faUndoAlt,
 } from '@fortawesome/fontawesome-free-solid'
 import SelectFrame from './SelectFrame'
 import TabataControls from './TabataControls'
@@ -14,9 +16,8 @@ import { formatTime } from '../helpers/utils'
 const { func, bool, string, number, object } = PropTypes
 
 const Play = ({ playing, togglePlay }) => {
-  const className = ''
   return (
-    <button id="play" className={className} onClick={togglePlay}>
+    <button className="btnTimer" onClick={togglePlay}>
       <FontAwesomeIcon icon={playing ? faPause : faPlay} />
     </button>
   )
@@ -28,11 +29,9 @@ Play.propTypes = {
 }
 
 const Refresh = ({ reset }) => (
-  <button
-    id="reset"
-    className="btn reset glyphicon glyphicon-refresh"
-    onClick={reset}
-  />
+  <button className="btnTimer" onClick={reset}>
+    <FontAwesomeIcon icon={faUndoAlt} />
+  </button>
 )
 
 Refresh.propTypes = {
@@ -40,11 +39,10 @@ Refresh.propTypes = {
 }
 
 const ToggleCount = ({ isCountingUp, toggleDirection }) => {
-  const className =
-    'glyphicon glyphicon-chevron-down' + (isCountingUp ? ' flip' : ' unflip')
+  const className = isCountingUp ? ' flip' : ' unflip'
   return (
-    <button className="btn up" onClick={toggleDirection}>
-      <i className={className} />
+    <button className="btnTimer" onClick={toggleDirection}>
+      <FontAwesomeIcon className={className} icon={faAngleDoubleUp} />
     </button>
   )
 }
@@ -105,10 +103,25 @@ export default class Home extends Component {
       <div>
         <Menu switchMode={switchMode} mode={mode} />
         <div className="main">
-          <div className={tattlerClass}>
-            {minutes}
-            <span className="colon">:</span>
-            {seconds}
+          <div className="bigTimer">
+            <button className={tattlerClass} onClick={togglePlay}>
+              {minutes}
+              <span className="colon">:</span>
+              {seconds}
+            </button>
+            <div className="timerControls">
+              <Play togglePlay={togglePlay} playing={playing} />
+              <Refresh reset={reset} />
+              {mode === 'Timer' ? (
+                <ToggleCount
+                  className="btnTimer"
+                  isCountingUp={isCountingUp}
+                  toggleDirection={toggleDirection}
+                />
+              ) : (
+                <div className="btnTimer" />
+              )}
+            </div>
           </div>
           <div className="controlsContainer">
             <div className="controls">
@@ -133,16 +146,6 @@ export default class Home extends Component {
                   rounds={rounds}
                   roundsElapsed={roundsElapsed}
                   style={{ marginLeft: '40px' }}
-                />
-              )}
-            </div>
-            <div className="timerControls">
-              <Play togglePlay={togglePlay} playing={playing} />
-              <Refresh reset={reset} />
-              {mode === 'Timer' && (
-                <ToggleCount
-                  isCountingUp={isCountingUp}
-                  toggleDirection={toggleDirection}
                 />
               )}
             </div>
