@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Home from '../components/Home'
-const alert = require('file!../res/alert_beep.mp3')
+const alert = require('file-loader!../res/alert_beep.mp3')
 const a = new Audio(alert)
 
 export default class HomeContainer extends Component {

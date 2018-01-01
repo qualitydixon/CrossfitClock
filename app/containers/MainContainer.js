@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { BrowserRouter, Route } from 'react-router-dom'
+import HomeContainer from './HomeContainer'
 import '../stylesheets/main.less'
 
-export default function MainContainer(props) {
-  return <div>{props.children}</div>
+export default class MainContainer extends Component {
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <div>
+            <Route path="/" component={HomeContainer} />
+            <Route path="/test" component={<h1>Hello!</h1>} />
+          </div>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
 
 MainContainer.propTypes = {
