@@ -11,7 +11,6 @@ export default class MainContainer extends Component {
         <BrowserRouter>
           <div>
             <Route path="/" component={HomeContainer} />
-            <Route path="/test" component={<h1>Hello!</h1>} />
           </div>
         </BrowserRouter>
       </div>
