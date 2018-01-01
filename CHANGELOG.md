@@ -2,3 +2,7 @@
 
 * Reset version number.
 * General style/layout updates.
+
+## 0.2.0 - 1/1/18
+
+* Upgrade to Webpack 3 and refactor config
