@@ -63,7 +63,7 @@ const Rounds = ({ style, shiftRounds, rounds, roundsElapsed }) => {
         title="Rounds"
       />
       <div className="elapsed">
-        <div>{'Completed'}</div>
+        <div className="elapsedTitle">{'Completed'}</div>
         <div className="currentlySelected">{roundsElapsed}</div>
       </div>
     </div>

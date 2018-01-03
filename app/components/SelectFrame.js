@@ -23,7 +23,7 @@ export default function SelectFrame(props) {
   }
   return (
     <div className="selectContainer">
-      {props.title && <div>{props.title}</div>}
+      {props.title && <div className="frameTitle">{props.title}</div>}
       <div className="select">
         <button
           id="minus"
